@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="赵致远 | Zhiyuan Zhao - 个人博客：技术文章、小说作品、兴趣爱好、精美图片">
+  <meta name="keywords" content="博客,技术,小说,动漫,个人主页">
+  <meta name="author" content="Zhiyuan Zhao">
+  <title>赵致远 | Zhiyuan Zhao</title>
+
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/hero-nav.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/reader.css">
+  <link rel="stylesheet" href="css/overlays.css">
+  <link rel="stylesheet" href="css/music-footer.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- 跳过导航：无障碍 -->
+  <a href="#main-content" class="skip-link">跳过导航，直达内容</a>
+
+  <!-- ========== 导航栏 ========== -->
+  <header class="navbar" id="navbar" role="banner">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo" aria-label="回到顶部">
+        <span class="logo-icon">🌸</span>
+        <span class="logo-text">Zhiyuan Zhao</span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="菜单" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-links" id="nav-links" role="navigation" aria-label="主导航">
+        <ul>
+          <li><a href="#tech" data-section="tech">Tech</a></li>
+          <li><a href="#writing" data-section="writing">Writing</a></li>
+          <li><a href="#reader" data-section="reader">Novel</a></li>
+          <li><a href="#hobbies" data-section="hobbies">Hobbies</a></li>
+          <li><a href="#gallery" data-section="gallery">Gallery</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ========== 樱花花瓣容器 ========== -->
+    <div class="petals-container" id="petals-container" aria-hidden="true"></div>
+
+    <!-- ========== 1. 首屏 Hero ========== -->
+    <section id="hero" class="hero">
+      <div class="hero-content">
+        <h1 class="hero-name">赵致远的个人博客</h1>
+        <p class="hero-subtitle">Zhiyuan Zhao</p>
+        <div class="hero-divider"></div>
+        <p class="hero-tagline">Code. Create. Conjure.</p>
+        <p class="hero-description">a personal universe of tech &amp; tales</p>
+        <a href="#tech" class="btn btn-primary hero-cta">✦ Explore</a>
+      </div>
+      <!-- 装饰星星 -->
+      <span class="sparkle sparkle-1" aria-hidden="true">✦</span>
+      <span class="sparkle sparkle-2" aria-hidden="true">✧</span>
+      <span class="sparkle sparkle-3" aria-hidden="true">✦</span>
+    </section>
+
+    <!-- 波浪分隔 -->
+    <div class="section-divider" aria-hidden="true">
+      <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
+        <path d="M0,30 C200,0 400,60 600,30 C800,0 1000,60 1200,30 L1200,60 L0,60 Z" fill="transparent"/>
+      </svg>
+    </div>
+
+    <!-- ========== 3. 技术文章 Tech ========== -->
+    <section id="tech" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title">
+          <span class="section-icon" aria-hidden="true">💻</span>
+          Tech
+        </h2>
+        <p class="section-subtitle">bits &amp; bytes / 技术笔记</p>
+        <div class="tag-filters" id="tech-filters" aria-label="按分类筛选文章"></div>
+        <div class="card-grid" id="tech-grid" role="list"></div>
+      </div>
+    </section>
+
+    <!-- 波浪分隔 -->
+    <div class="section-divider" aria-hidden="true">
+      <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
+        <path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,0 L0,0 Z" fill="transparent"/>
+      </svg>
+    </div>
+
+    <!-- ========== 4. 小说作品 Writing ========== -->
+    <section id="writing" class="section">
+      <div class="container">
+        <h2 class="section-title">
+          <span class="section-icon" aria-hidden="true">📖</span>
+          Writing
+        </h2>
+        <p class="section-subtitle">words &amp; worlds / 小说作品</p>
+        <div class="card-grid novel-cards" id="writing-grid" role="list"></div>
+      </div>
+    </section>
+
+    <!-- ========== 5. 小说阅读区 Reader ========== -->
+    <section id="reader" class="section section-alt reader-section">
+      <div class="container">
+        <h2 class="section-title">
+          <span class="section-icon" aria-hidden="true">◆</span>
+          阅读
+        </h2>
+        <p class="section-subtitle">沉浸在故事的世界里</p>
+
+        <!-- 小说选择器 -->
+        <div class="novel-tabs" id="novel-tabs" role="tablist" aria-label="选择小说"></div>
+
+        <!-- 阅读器主体 -->
+        <div class="reader-layout" id="reader-layout">
+          <!-- 章节侧边栏 -->
+          <aside class="chapter-sidebar" id="chapter-sidebar" aria-label="章节目录">
+            <button class="chapter-sidebar-toggle" id="chapter-toggle" aria-label="收起目录">☰ 目录</button>
+            <nav class="chapter-nav" id="chapter-nav"></nav>
+          </aside>
+          <!-- 正文区 -->
+          <article class="reader-content" id="reader-content">
+            <div class="reader-placeholder">
+              <span class="reader-placeholder-icon" aria-hidden="true">📚</span>
+              <p>在上方选择一部小说开始阅读</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 波浪分隔 -->
+    <div class="section-divider" aria-hidden="true">
+      <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
+        <path d="M0,30 C200,0 400,60 600,30 C800,0 1000,60 1200,30 L1200,60 L0,60 Z" fill="transparent"/>
+      </svg>
+    </div>
+
+    <!-- ========== 6. 兴趣爱好 Hobbies ========== -->
+    <section id="hobbies" class="section">
+      <div class="container">
+        <h2 class="section-title">
+          <span class="section-icon" aria-hidden="true">🎮</span>
+          Hobbies
+        </h2>
+        <p class="section-subtitle">beyond the screen / 兴趣爱好</p>
+        <div class="hobbies-grid" id="hobbies-grid" role="list"></div>
+      </div>
+    </section>
+
+    <!-- 波浪分隔 -->
+    <div class="section-divider" aria-hidden="true">
+      <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
+        <path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,0 L0,0 Z" fill="transparent"/>
+      </svg>
+    </div>
+
+    <!-- ========== 7. 精美图片 Gallery ========== -->
+    <section id="gallery" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title">
+          <span class="section-icon" aria-hidden="true">🖼️</span>
+          Gallery
+        </h2>
+        <p class="section-subtitle">captured moments / 光影瞬间</p>
+        <div class="gallery-masonry" id="gallery-grid" role="list"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== 8. 页脚 Footer ========== -->
+  <footer class="footer" id="footer" role="contentinfo">
+    <div class="footer-top">
+      <a href="#hero" class="footer-logo">🌸 Zhiyuan Zhao</a>
+      <nav class="footer-links" aria-label="页脚导航">
+        <a href="#tech">Tech</a>
+        <a href="#writing">Writing</a>
+        <a href="#reader">Novel</a>
+        <a href="#hobbies">Hobbies</a>
+        <a href="#gallery">Gallery</a>
+      </nav>
+    </div>
+    <div class="footer-socials">
+      <a href="https://github.com/zhiyuanzhao41-gif" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      </a>
+      <a href="mailto:zhiyuanzhao41@gmail.com" aria-label="Email">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+      </a>
+    </div>
+    <p class="footer-copy">© 2026 Zhiyuan Zhao · Built with HTML, CSS &amp; Cherry Blossoms 🌸</p>
+  </footer>
+
+  <!-- ========== 模态框（文章阅读） ========== -->
+  <div class="modal-overlay hidden" id="modal-overlay" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" aria-label="关闭">&times;</button>
+      <div class="modal-body">
+        <span class="modal-tag" id="modal-tag"></span>
+        <h2 class="modal-title" id="modal-title"></h2>
+        <time class="modal-date" id="modal-date"></time>
+        <div class="modal-text" id="modal-text"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 灯箱（图片浏览） ========== -->
+  <div class="lightbox hidden" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" aria-label="关闭">&times;</button>
+    <button class="lightbox-prev" aria-label="上一张">❮</button>
+    <img class="lightbox-image" id="lightbox-img" src="" alt="">
+    <p class="lightbox-caption" id="lightbox-caption"></p>
+    <button class="lightbox-next" aria-label="下一张">❯</button>
+    <span class="lightbox-counter" id="lightbox-counter"></span>
+  </div>
+
+  <!-- ========== 背景音乐播放器 ========== -->
+  <div class="music-player" id="music-player" aria-label="音乐播放器">
+    <audio id="bgm-audio" preload="metadata"></audio>
+
+    <!-- 歌曲信息 -->
+    <div class="music-info">
+      <span class="music-title" id="music-title">キセキ～未来へ～</span>
+      <span class="music-artist" id="music-artist">whiteeeen</span>
+      <span class="music-index" id="music-index">1/1</span>
+    </div>
+
+    <!-- 播放控制 -->
+    <div class="music-controls">
+      <button class="music-btn music-prev" aria-label="上一首" title="上一首">⏮</button>
+      <button class="music-btn music-play" id="music-play-btn" aria-label="播放音乐" title="播放">
+        <span class="music-icon">▶</span>
+      </button>
+      <button class="music-btn music-next" aria-label="下一首" title="下一首">⏭</button>
+    </div>
+
+    <!-- 音量 -->
+    <div class="music-volume">
+      <span class="volume-icon" aria-hidden="true">🔊</span>
+      <input type="range" id="volume-slider" min="0" max="100" value="30" aria-label="音量">
+    </div>
+  </div>
+
+  <script src="js/markdown.js"></script>
+  <script src="js/site-data.js"></script>
+  <script src="js/renders.js"></script>
+  <script src="js/reader.js"></script>
+  <script src="js/overlays.js"></script>
+  <script src="js/music-player.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/init.js"></script>
+</body>
+</html>

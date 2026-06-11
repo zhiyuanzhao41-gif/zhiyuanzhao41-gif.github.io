@@ -1,0 +1,197 @@
+/* ============================================================
+   小说阅读器
+   ============================================================ */
+
+/* -------------------------------------------------------
+   9. 小说阅读区
+   ------------------------------------------------------- */
+.reader-section {
+  background: var(--color-bg-alt);
+}
+
+/* 小说选择标签 */
+.novel-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+}
+.novel-tab {
+  padding: 0.5rem 1.4rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 2px solid var(--color-secondary-light);
+  border-radius: 20px;
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--ease-smooth);
+  font-family: var(--font-sans);
+}
+.novel-tab:hover {
+  border-color: var(--color-secondary);
+  color: var(--color-secondary);
+}
+.novel-tab.active {
+  background: var(--color-secondary);
+  color: #fff;
+  border-color: var(--color-secondary);
+}
+
+/* 阅读器布局 */
+.reader-layout {
+  display: flex;
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* 章节侧边栏 */
+.chapter-sidebar {
+  width: 200px;
+  flex-shrink: 0;
+  position: sticky;
+  top: calc(var(--nav-height) + 1rem);
+  align-self: flex-start;
+  max-height: calc(100vh - var(--nav-height) - 2rem);
+  overflow-y: auto;
+  background: var(--color-card);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-border);
+  padding: 0.8rem;
+  transition: all var(--ease-smooth);
+}
+.chapter-sidebar.collapsed {
+  width: 44px;
+  padding: 0.5rem;
+}
+.chapter-sidebar.collapsed .chapter-nav { display: none; }
+.chapter-sidebar.collapsed .chapter-sidebar-toggle { text-align: center; padding: 0.3rem; }
+
+.chapter-sidebar-toggle {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  padding: 0.4rem;
+  border-radius: 8px;
+  transition: all var(--ease-smooth);
+}
+.chapter-sidebar-toggle:hover {
+  color: var(--color-primary);
+  background: rgba(255, 143, 171, 0.06);
+}
+
+.chapter-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-top: 0.5rem;
+}
+.chapter-link {
+  display: block;
+  padding: 0.5rem 0.7rem;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--ease-smooth);
+  border: none;
+  background: none;
+  text-align: left;
+  font-family: var(--font-sans);
+  width: 100%;
+}
+.chapter-link:hover {
+  color: var(--color-primary);
+  background: rgba(255, 143, 171, 0.06);
+}
+.chapter-link.active {
+  color: var(--color-primary);
+  background: rgba(255, 143, 171, 0.1);
+  font-weight: 500;
+}
+
+/* 正文区 */
+.reader-content {
+  flex: 1;
+  min-width: 0;
+  background: var(--color-reader-bg);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-border);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  box-shadow: 0 2px 16px rgba(180, 130, 180, 0.06);
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.reader-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  color: var(--color-text-secondary);
+}
+.reader-placeholder-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+/* 阅读器正文排版 */
+.reader-content h1.novel-heading {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-text);
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.reader-content h2.novel-heading {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin: 2.5rem 0 1.2rem;
+  padding-left: 0.5rem;
+  border-left: 3px solid var(--color-primary);
+}
+.reader-content h2.novel-heading::before {
+  content: '◆ ';
+  font-size: 0.8rem;
+  vertical-align: middle;
+  color: var(--color-primary);
+}
+
+.reader-content p {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: var(--color-text);
+  margin-bottom: 1em;
+  text-indent: 2em;
+  text-align: justify;
+}
+
+/* 阅读进度条 */
+.reader-progress {
+  position: sticky;
+  top: var(--nav-height);
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  width: 0%;
+  z-index: 5;
+  transition: width 0.1s linear;
+  border-radius: 0 2px 0 0;
+}
