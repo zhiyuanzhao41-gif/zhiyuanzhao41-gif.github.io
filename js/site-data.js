@@ -102,12 +102,13 @@ const siteData = {
 
   // 图片画廊
   gallery: [
-    { src: 'assets/images/gallery/photo1.jpg', alt: '濑名紫阳花', caption: '' },
+    { src: 'assets/images/gallery/photo1.jpg', alt: '晓美焰', caption: '' },
     { src: 'assets/images/gallery/photo4.png', alt: '萝莉百合', caption: '' },
-    { src: 'assets/images/gallery/photo2.jpg', alt: '贝拉Kira', caption: '' },
-    { src: 'assets/images/gallery/photo3.jpg', alt: '想吃掉我的非人少女', caption: '' },
+    { src: 'assets/images/gallery/photo2.jpg', alt: '慈姐', caption: '' },
     { src: 'assets/images/gallery/photo5.jpeg', alt: '樱羽艾玛', caption: '' },
-    { src: 'assets/images/gallery/photo6.jpg', alt: '夏美桃', caption: '' }
+    { src: 'assets/images/gallery/photo6.jpg', alt: '夏美桃', caption: '' },
+    { src: 'assets/images/gallery/photo3.jpg', alt: '三角初音', caption: '' }
+
   ]
 };
 

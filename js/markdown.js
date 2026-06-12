@@ -94,10 +94,13 @@ const Markdown = (() => {
   }
 
   /**
-   * 行内格式转换：**粗体**
+   * 行内格式转换：**粗体**、*斜体*
    */
   function inlineFormat(text) {
-    return text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    // 先粗体后斜体，避免 * 互相干扰
+    return text
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>');
   }
 
   /**

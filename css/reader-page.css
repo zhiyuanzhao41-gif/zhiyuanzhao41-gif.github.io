@@ -1,0 +1,376 @@
+/* ============================================================
+   统一阅读页面 — 技术文章 & 小说共用
+   排版继承 base.css 设计令牌
+   ============================================================ */
+
+/* -------------------------------------------------------
+   1. 顶部导航条
+   ------------------------------------------------------- */
+.reader-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  height: var(--nav-height);
+  background: rgba(255, 245, 249, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.reader-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.reader-back {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: color var(--ease-smooth);
+  white-space: nowrap;
+}
+.reader-back:hover {
+  color: var(--color-primary-dark);
+}
+
+.reader-brand {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text);
+  white-space: nowrap;
+}
+
+.reader-type {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+/* -------------------------------------------------------
+   2. 主布局
+   ------------------------------------------------------- */
+.reader-main {
+  display: flex;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+/* -------------------------------------------------------
+   3. 章节侧边栏（仅小说）
+   ------------------------------------------------------- */
+.reader-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  position: sticky;
+  top: calc(var(--nav-height) + 2rem);
+  align-self: flex-start;
+  max-height: calc(100vh - var(--nav-height) - 3rem);
+  overflow-y: auto;
+  background: var(--color-card);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-border);
+  padding: 0.8rem;
+  transition: all var(--ease-smooth);
+}
+
+.reader-sidebar.hidden {
+  display: none;
+}
+
+.reader-sidebar.collapsed {
+  width: 44px;
+  padding: 0.5rem;
+}
+.reader-sidebar.collapsed .sidebar-chapters {
+  display: none;
+}
+.reader-sidebar.collapsed .sidebar-toggle {
+  text-align: center;
+  padding: 0.3rem;
+}
+
+.sidebar-toggle {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  padding: 0.4rem;
+  border-radius: 8px;
+  transition: all var(--ease-smooth);
+  text-align: left;
+}
+.sidebar-toggle:hover {
+  color: var(--color-primary);
+  background: rgba(255, 143, 171, 0.06);
+}
+
+.sidebar-chapters {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-top: 0.5rem;
+}
+
+.chapter-link {
+  display: block;
+  padding: 0.5rem 0.7rem;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--ease-smooth);
+  border: none;
+  background: none;
+  text-align: left;
+  font-family: var(--font-sans);
+  width: 100%;
+  word-break: break-all;
+}
+.chapter-link:hover {
+  color: var(--color-primary);
+  background: rgba(255, 143, 171, 0.06);
+}
+.chapter-link.active {
+  color: var(--color-primary);
+  background: rgba(255, 143, 171, 0.1);
+  font-weight: 500;
+}
+
+/* -------------------------------------------------------
+   4. 正文区（统一排版）
+   ------------------------------------------------------- */
+.reader-body {
+  flex: 1;
+  min-width: 0;
+  max-width: 750px;
+  margin: 0 auto;
+  background: var(--color-reader-bg);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-border);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  box-shadow: 0 2px 16px rgba(180, 130, 180, 0.06);
+  position: relative;
+}
+
+/* 阅读进度条 */
+.reader-progress {
+  position: sticky;
+  top: var(--nav-height);
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  width: 0%;
+  z-index: 5;
+  border-radius: 0 2px 0 0;
+  margin: -1.5rem -1.5rem 1.5rem;
+  transition: width 0.1s linear;
+}
+
+/* -------- 文章元信息 -------- */
+.reader-meta {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.reader-tag {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.2rem 0.7rem;
+  border-radius: 12px;
+  background: rgba(255, 143, 171, 0.1);
+  color: var(--color-primary-dark);
+}
+.reader-date {
+  display: inline-block;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  margin-left: 0.6rem;
+}
+
+/* -------- 统一排版：标题 -------- */
+.reader-body h1.reader-title {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-text);
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.reader-body h2.novel-heading {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin: 2.5rem 0 1.2rem;
+  padding-left: 0.5rem;
+  border-left: 3px solid var(--color-primary);
+}
+.reader-body h2.novel-heading::before {
+  content: '◆ ';
+  font-size: 0.8rem;
+  vertical-align: middle;
+  color: var(--color-primary);
+}
+
+/* -------- 统一排版：段落 -------- */
+.reader-body p {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: var(--color-text);
+  margin-bottom: 1em;
+  text-indent: 2em;
+  text-align: justify;
+}
+
+/* -------- 统一排版：粗体 -------- */
+.reader-body strong {
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+/* -------- 统一排版：斜体 -------- */
+.reader-body em {
+  font-style: italic;
+  color: var(--color-primary-dark);
+}
+
+/* -------- 统一排版：换行 -------- */
+.reader-body br + br {
+  display: none;
+}
+
+/* -------------------------------------------------------
+   5. 加载 & 错误状态
+   ------------------------------------------------------- */
+.reader-loading,
+.reader-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+.reader-loading-icon,
+.reader-error-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.reader-error .reader-error-icon {
+  opacity: 0.6;
+}
+
+/* -------------------------------------------------------
+   6. 响应式
+   ------------------------------------------------------- */
+
+/* 平板 */
+@media (max-width: 1024px) {
+  .reader-main {
+    gap: 1.2rem;
+  }
+  .reader-sidebar {
+    width: 180px;
+  }
+}
+
+/* 手机 */
+@media (max-width: 768px) {
+  .reader-topbar {
+    padding: 0 1rem;
+  }
+  .reader-logo {
+    font-size: 0.9rem;
+  }
+
+  .reader-main {
+    flex-direction: column;
+    padding: 1rem 0.5rem 3rem;
+    gap: 1rem;
+  }
+
+  .reader-sidebar {
+    width: 100%;
+    position: static;
+    max-height: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.6rem;
+    border-radius: 12px;
+  }
+  .reader-sidebar.hidden {
+    display: none;
+  }
+  .reader-sidebar.collapsed {
+    width: 100%;
+  }
+  .sidebar-toggle {
+    display: none;
+  }
+  .sidebar-chapters {
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 0;
+    gap: 0.3rem;
+  }
+  .chapter-link {
+    font-size: 0.8rem;
+    padding: 0.35rem 0.6rem;
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    width: auto;
+  }
+  .chapter-link.active {
+    background: rgba(255, 143, 171, 0.08);
+    border-color: var(--color-primary);
+  }
+
+  .reader-body {
+    padding: 1.2rem;
+    border-radius: 12px;
+    margin: 0;
+    max-width: none;
+  }
+  .reader-body p {
+    text-indent: 1.5em;
+    font-size: 0.98rem;
+  }
+  .reader-progress {
+    margin: -1.2rem -1.2rem 1.2rem;
+  }
+}
+
+/* -------------------------------------------------------
+   7. 减少动画
+   ------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .reader-progress {
+    transition: none;
+  }
+}

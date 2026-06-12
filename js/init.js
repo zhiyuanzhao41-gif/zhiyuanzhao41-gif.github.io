@@ -26,12 +26,10 @@ async function init() {
   initKeyboard();
   initMusicPlayer();
   initBackToTop();
-  initChapterSidebar();
 
-  // 加载小说
+  // 加载小说卡片
   await loadNovelIndex();
   renderWritingCards(novelList);
-  renderNovelTabs();
 }
 
 document.addEventListener('DOMContentLoaded', init);

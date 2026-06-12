@@ -41,13 +41,13 @@ function initNavigation() {
     }
   });
 
-  // 技术文章卡片点击 → 模态框
+	// 技术文章卡片点击 → 新标签页打开统一阅读页
   const techGrid = $('#tech-grid');
   if (techGrid) {
     techGrid.addEventListener('click', (e) => {
       const card = e.target.closest('.card-tech');
       if (!card) return;
-      openModal(card.dataset.id);
+      window.open(`reader.html?type=tech&id=${card.dataset.id}`, '_blank');
     });
   }
 
