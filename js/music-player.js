@@ -1,31 +1,38 @@
 /**
- * 背景音乐播放器
+ * 背景音乐播放器 — 右下角圆形 / 点击展开
  */
 'use strict';
 
 /* ============================================================
-   6. 背景音乐播放器
+   1. 播放列表
    ============================================================ */
 
 /** 播放列表：在此添加/修改音乐（将文件放入 assets/music/ 目录） */
 const playlist = [
-  { title: 'キセキ～未来へ～', artist: 'whiteeeen', src: 'assets/music/whiteeeen - キセキ～未来へ～.mp3' },
-  { title: 'Hana', artist: 'Will Stetson', src: 'assets/music/Will Stetson - Hana.mp3' },
+  { title: '枝江', artist: '九重临', src: 'assets/music/九重临,小心台階 - 枝江.mp3' },
+  { title: 'キリトリセン（剪切线）', artist: '小日向美香', src: 'assets/music/小日向美香,长崎素世 - キリトリセン.mp3' },
+  { title: 'キセキ～未来へ～', artist: 'whiteeeen', src: 'assets/music/whiteeeen - キセキ～未来へ～.mp3' }
 ];
 
 let currentTrackIdx = 0;
 
+/* ============================================================
+   2. 初始化
+   ============================================================ */
 function initMusicPlayer() {
-  const audio = $('#bgm-audio');
-  const playBtn = $('#music-play-btn');
-  const icon = $('.music-icon', playBtn);
+  const audio       = $('#bgm-audio');
+  const player      = $('#music-player');
+  const toggleBtn   = $('#music-toggle');
+  const toggleIcon  = $('#music-toggle-icon');
+  const panel       = $('#music-panel');
+  const playBtn     = $('#music-play-btn');
+  const playIcon    = $('.music-icon', playBtn);
   const volumeSlider = $('#volume-slider');
-  const player = $('#music-player');
-  const titleEl = $('#music-title');
-  const artistEl = $('#music-artist');
-  const indexEl = $('#music-index');
+  const titleEl     = $('#music-title');
+  const artistEl    = $('#music-artist');
+  const indexEl     = $('#music-index');
 
-  if (!audio || !playBtn) return;
+  if (!audio || !toggleBtn || !panel) return;
 
   // 音量初始化
   const savedVol = localStorage.getItem('bgm-volume');
@@ -33,8 +40,11 @@ function initMusicPlayer() {
   if (volumeSlider) volumeSlider.value = audio.volume * 100;
 
   let isPlaying = false;
+  let expanded = false;
 
-  /** 加载指定索引的歌曲 */
+  /* ============================================================
+     3. 歌曲加载
+     ============================================================ */
   function loadTrack(idx) {
     if (playlist.length === 0) return;
     idx = ((idx % playlist.length) + playlist.length) % playlist.length;
@@ -47,7 +57,7 @@ function initMusicPlayer() {
     if (artistEl) artistEl.textContent = track.artist;
     if (indexEl) indexEl.textContent = `${idx + 1}/${playlist.length}`;
 
-    // 更新 prev/next 按钮状态
+    // 单曲时隐藏 prev/next
     if (playlist.length <= 1) {
       $$('.music-prev, .music-next').forEach(b => b.style.opacity = '0.35');
     } else {
@@ -55,81 +65,120 @@ function initMusicPlayer() {
     }
   }
 
-  /** 播放或暂停 */
+  /* ============================================================
+     4. 播放 / 暂停
+     ============================================================ */
   function togglePlay() {
     if (isPlaying) {
       audio.pause();
-      player.classList.remove('playing');
-      playBtn.setAttribute('aria-label', '播放音乐');
-      playBtn.title = '播放';
-      icon.textContent = '▶';
       isPlaying = false;
+      player.classList.remove('playing');
+      setIcons('▶');
     } else {
       audio.play().then(() => {
-        player.classList.add('playing');
-        playBtn.setAttribute('aria-label', '暂停音乐');
-        playBtn.title = '暂停';
-        icon.textContent = '⏸';
         isPlaying = true;
+        player.classList.add('playing');
+        setIcons('⏸');
       }).catch(err => {
         console.log('音乐播放需要用户交互:', err);
       });
     }
   }
 
-  /** 上一首 */
-  function prevTrack() {
-    if (playlist.length <= 1) return;
-    const wasPlaying = isPlaying;
-    loadTrack(currentTrackIdx - 1);
-    if (wasPlaying) {
-      audio.play().then(() => {
-        isPlaying = true;
-        player.classList.add('playing');
-        icon.textContent = '⏸';
-      }).catch(() => {});
-    }
+  function setIcons(icon) {
+    if (toggleIcon) toggleIcon.textContent = icon;
+    if (playIcon) playIcon.textContent = icon;
   }
 
-  /** 下一首 */
-  function nextTrack() {
-    if (playlist.length <= 1) return;
-    const wasPlaying = isPlaying;
-    loadTrack(currentTrackIdx + 1);
-    if (wasPlaying) {
-      audio.play().then(() => {
-        isPlaying = true;
-        player.classList.add('playing');
-        icon.textContent = '⏸';
-      }).catch(() => {});
-    }
+  /* ============================================================
+     5. 展开 / 收起
+     ============================================================ */
+  function expandPanel() {
+    expanded = true;
+    player.classList.add('expanded');
+    toggleBtn.setAttribute('aria-label', '播放/暂停');
+    toggleBtn.title = '播放/暂停';
   }
 
-  // 播放/暂停按钮
-  playBtn.addEventListener('click', togglePlay);
+  function collapsePanel() {
+    expanded = false;
+    player.classList.remove('expanded');
+    // 收起后图标恢复音符
+    if (toggleIcon && !isPlaying) toggleIcon.textContent = '🎵';
+    toggleBtn.setAttribute('aria-label', '展开音乐播放器');
+    toggleBtn.title = '展开播放器';
+  }
+
+  /* ============================================================
+     6. 事件绑定
+     ============================================================ */
+
+  // 圆形切换按钮：收起时展开，展开时播放/暂停
+  toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (!expanded) {
+      expandPanel();
+      // 展开后自动开始播放
+      if (!isPlaying) togglePlay();
+    } else {
+      togglePlay();
+    }
+  });
+
+  // 面板内播放按钮
+  if (playBtn) {
+    playBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      togglePlay();
+    });
+  }
 
   // 上一首 / 下一首
-  $('.music-prev', player)?.addEventListener('click', prevTrack);
-  $('.music-next', player)?.addEventListener('click', nextTrack);
+  $$('.music-prev, .music-next').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (playlist.length <= 1) return;
+      const wasPlaying = isPlaying;
+      if (btn.classList.contains('music-prev')) {
+        loadTrack(currentTrackIdx - 1);
+      } else {
+        loadTrack(currentTrackIdx + 1);
+      }
+      if (wasPlaying) {
+        audio.play().then(() => {
+          isPlaying = true;
+          player.classList.add('playing');
+          setIcons('⏸');
+        }).catch(() => {});
+      }
+    });
+  });
+
+  // 点击播放器外部 → 收起面板
+  document.addEventListener('click', (e) => {
+    if (expanded && !player.contains(e.target)) {
+      collapsePanel();
+    }
+  });
 
   // 播放结束自动切下一首
   audio.addEventListener('ended', () => {
     if (playlist.length > 1) {
       loadTrack(currentTrackIdx + 1);
       audio.play().then(() => {
-        player.classList.add('playing');
-        icon.textContent = '⏸';
         isPlaying = true;
+        player.classList.add('playing');
+        setIcons('⏸');
       }).catch(() => {
         isPlaying = false;
         player.classList.remove('playing');
-        icon.textContent = '▶';
+        setIcons('▶');
       });
     } else {
-      // 单曲循环
       isPlaying = false;
       player.classList.remove('playing');
-      icon.textContent = '▶';
+      setIcons('▶');
+      if (!expanded && toggleIcon) toggleIcon.textContent = '🎵';
     }
   });
 
@@ -145,14 +194,13 @@ function initMusicPlayer() {
   audio.addEventListener('error', () => {
     console.warn('音频加载失败:', audio.src);
     player.style.opacity = '0.5';
-    playBtn.title = '音频加载失败';
   });
 
   // 键盘快捷键：空格键控制播放/暂停
   document.addEventListener('keydown', (e) => {
-    // 不在输入框中时响应空格
     if (e.code === 'Space' && document.activeElement === document.body) {
       e.preventDefault();
+      if (!expanded) expandPanel();
       togglePlay();
     }
   });

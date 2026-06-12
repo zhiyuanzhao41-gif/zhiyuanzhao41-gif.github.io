@@ -195,26 +195,34 @@
   <div class="music-player" id="music-player" aria-label="音乐播放器">
     <audio id="bgm-audio" preload="metadata"></audio>
 
-    <!-- 歌曲信息 -->
-    <div class="music-info">
-      <span class="music-title" id="music-title">キセキ～未来へ～</span>
-      <span class="music-artist" id="music-artist">whiteeeen</span>
-      <span class="music-index" id="music-index">1/1</span>
-    </div>
+    <!-- 收起状态：小圆形按钮 -->
+    <button class="music-toggle" id="music-toggle" aria-label="展开音乐播放器" title="展开播放器">
+      <span class="music-icon" id="music-toggle-icon">🎵</span>
+    </button>
 
-    <!-- 播放控制 -->
-    <div class="music-controls">
-      <button class="music-btn music-prev" aria-label="上一首" title="上一首">⏮</button>
-      <button class="music-btn music-play" id="music-play-btn" aria-label="播放音乐" title="播放">
-        <span class="music-icon">▶</span>
-      </button>
-      <button class="music-btn music-next" aria-label="下一首" title="下一首">⏭</button>
-    </div>
+    <!-- 展开面板 -->
+    <div class="music-panel" id="music-panel">
+      <!-- 歌曲信息 -->
+      <div class="music-info">
+        <span class="music-title" id="music-title">キセキ～未来へ～</span>
+        <span class="music-artist" id="music-artist">whiteeeen</span>
+        <span class="music-index" id="music-index">1/1</span>
+      </div>
 
-    <!-- 音量 -->
-    <div class="music-volume">
-      <span class="volume-icon" aria-hidden="true">🔊</span>
-      <input type="range" id="volume-slider" min="0" max="100" value="30" aria-label="音量">
+      <!-- 播放控制 -->
+      <div class="music-controls">
+        <button class="music-btn music-prev" aria-label="上一首" title="上一首">⏮</button>
+        <button class="music-btn music-play" id="music-play-btn" aria-label="播放音乐" title="播放">
+          <span class="music-icon">▶</span>
+        </button>
+        <button class="music-btn music-next" aria-label="下一首" title="下一首">⏭</button>
+      </div>
+
+      <!-- 音量 -->
+      <div class="music-volume">
+        <span class="volume-icon" aria-hidden="true">🔊</span>
+        <input type="range" id="volume-slider" min="0" max="100" value="30" aria-label="音量">
+      </div>
     </div>
   </div>
 
