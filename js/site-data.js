@@ -102,14 +102,12 @@ const siteData = {
 
   // 图片画廊
   gallery: [
-    { src: 'assets/images/gallery/photo1.jpg', alt: '照片1', caption: '' },
-    { src: 'assets/images/gallery/photo2.jpg', alt: '照片2', caption: '' },
-    { src: 'assets/images/gallery/photo3.jpg', alt: '照片3', caption: '' },
-    { src: 'assets/images/gallery/photo4.png', alt: '照片4', caption: '' },
-    { gradient: '180deg, #A8E6CF, #F0F4FF', emoji: '🌊' },
-    { gradient: '135deg, #D5CCF5, #FF8FAB', emoji: '🦋' },
-    { gradient: '45deg, #FFF5F9, #B8A9E8', emoji: '🌙' },
-    { gradient: '180deg, #F0F4FF, #F5D78E', emoji: '☁️' },
+    { src: 'assets/images/gallery/photo1.jpg', alt: '濑名紫阳花', caption: '' },
+    { src: 'assets/images/gallery/photo4.png', alt: '萝莉百合', caption: '' },
+    { src: 'assets/images/gallery/photo2.jpg', alt: '贝拉Kira', caption: '' },
+    { src: 'assets/images/gallery/photo3.jpg', alt: '想吃掉我的非人少女', caption: '' },
+    { src: 'assets/images/gallery/photo5.jpeg', alt: '樱羽艾玛', caption: '' },
+    { src: 'assets/images/gallery/photo6.jpg', alt: '夏美桃', caption: '' }
   ]
 };
 
